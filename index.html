@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mi Propuesta Especial 💖</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.screen {
+    display: none;
+    text-align: center;
+    animation: fade 0.8s ease;
+}
+
+.active {
+    display: block;
+}
+
+h1 {
+    font-size: 3em;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+.arrow {
+    margin-top: 40px;
+    font-size: 60px;
+    color: white;
+    cursor: pointer;
+    animation: bounce 1.5s infinite;
+    user-select: none;
+}
+
+/* Botones */
+.buttons {
+    margin-top: 30px;
+}
+
+button {
+    font-size: 1.5em;
+    padding: 15px 35px;
+    margin: 10px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.yes {
+    background: linear-gradient(135deg, #ff4d6d, #ff1e56);
+    color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.yes:hover {
+    transform: scale(1.1);
+}
+
+.no {
+    background: white;
+    color: #ff4d6d;
+    position: relative;
+}
+
+/* Mensajes */
+.message {
+    font-size: 2em;
+    color: white;
+    margin-top: 25px;
+    min-height: 50px;
+    animation: fade 1s ease;
+}
+
+/* Corazón */
+.heart {
+    font-size: 70px;
+    margin-top: 25px;
+    animation: pulse 1.5s infinite;
+}
+
+/* Pantalla final */
+.final {
+    display: none;
+    text-align: center;
+    animation: fade 1s ease;
+}
+
+.final h1 {
+    font-size: 3.2em;
+}
+
+.final p {
+    font-size: 1.8em;
+    color: white;
+    margin-top: 15px;
+}
+
+/* Animaciones */
+@keyframes bounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(15px); }
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 600px){
+    h1{font-size:2.2em;}
+    .final h1{font-size:2.4em;}
+    button{font-size:1.2em;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Pantalla 1 -->
+<div id="screen1" class="screen active">
+    <h1>No quería pedírtelo así…</h1>
+    <div class="arrow" onclick="nextScreen()">➡️</div>
+</div>
+
+<!-- Pantalla 2 -->
+<div id="screen2" class="screen">
+    <h1>¿Quieres ser mi novia?</h1>
+
+    <div class="buttons" id="buttonsBox">
+        <button class="yes" onclick="sayYes()">Sí 💖</button>
+        <button class="no" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No 💔</button>
+    </div>
+
+    <div id="response" class="message"></div>
+    <div class="heart">❤️</div>
+</div>
+
+<!-- Pantalla Final -->
+<div id="finalScreen" class="final">
+    <h1>Sabía que dirías que sí 💘😍</h1>
+    <p>Desde hoy mi corazón es tuyo ❤️</p>
+    <div class="heart">💖</div>
+</div>
+
+<script>
+function nextScreen() {
+    document.getElementById("screen1").classList.remove("active");
+    document.getElementById("screen2").classList.add("active");
+}
+
+function sayYes() {
+    // ocultar botones
+    document.getElementById("buttonsBox").style.display = "none";
+    document.getElementById("screen2").classList.remove("active");
+
+    // mostrar pantalla final
+    document.getElementById("finalScreen").style.display = "block";
+}
+
+function moveNo() {
+    const btn = document.getElementById("noBtn");
+
+    const maxX = 140;
+    const maxY = 120;
+
+    const x = Math.random() * maxX * 2 - maxX;
+    const y = Math.random() * maxY * 2 - maxY;
+
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+</script>
+
+</body>
+</html>
